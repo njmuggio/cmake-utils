@@ -22,6 +22,26 @@
 
 cmake_minimum_required(VERSION 3.12)
 
+# Changes the case of a string.
+#
+# This strips out all non-alphanumeric characters. This function works best with
+# english inputs, as 'A' and 'I' are treated specially. For example, given the
+# inputs "YesISuppose" or "HaveAGo", three words will be identified: "Yes I
+# Suppose" and "Have A Go", respectively.
+#
+# Arguments:
+#   case_type: One of {CAMEL, PASCAL, SNAKE, DEAD_SNAKE, SCREAMING_SNAKE,
+#              KEBAB, DEAD_KEBAB, SCREAMING_KEBAB}
+#   string: String to convert
+#   output_variable: Name of the output variable
+#
+# Example outputs for each case type:
+# - CAMEL: abc123Xyz789
+# - PASCAL: Abc123Xyz789
+# - SNAKE/DEAD_SNAKE: abc_123_xyz_789
+# - SCREAMING_SNAKE: ABC_123_XYZ_789
+# - KEBAB/DEAD_KEBAB: abc-123-xyz-789
+# - SCREAMING_KEBAB: ABC-123-XYZ-789
 function(change_case case_type string output_variable)
   string(REGEX MATCHALL "([a-zA-Z0-9]+)" chunk_list "${string}")
 
@@ -79,6 +99,7 @@ function(change_case case_type string output_variable)
   set(${output_variable} "${result}" PARENT_SCOPE)
 endfunction()
 
+# Lower-case the first character in a string.
 function(first_lower string output_variable)
   string(SUBSTRING "${string}" 0 1 first_letter)
   string(TOLOWER "${first_letter}" first_letter)
@@ -86,6 +107,7 @@ function(first_lower string output_variable)
   set(${output_variable} "${first_letter}${remaining}" PARENT_SCOPE)
 endfunction()
 
+# Upper-case the first character in a string.
 function(first_upper string output_variable)
   string(SUBSTRING "${string}" 0 1 first_letter)
   string(TOUPPER "${first_letter}" first_letter)
