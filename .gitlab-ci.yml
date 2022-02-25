@@ -7,5 +7,7 @@ stages:
 test-job:
   stage: test
   script:
-    - /opt/cmake-3.12/bin/cmake -S "$CI_PROJECT_DIR" -B /tmp/build
-    - /opt/cmake-3.12/bin/ctest --test-dir /tmp/build
+    - mkdir /tmp/build
+    - cd /tmp/build
+    - /opt/cmake-3.12/bin/cmake $CI_PROJECT_DIR
+    - /opt/cmake-3.12/bin/ctest
