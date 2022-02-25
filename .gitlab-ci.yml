@@ -1,0 +1,13 @@
+image: alpine:latest
+
+stages:
+  - test
+  - release
+
+test-job:
+  stage: test
+  script:
+    - mkdir /opt/cmake-3.12
+    - wget -O - https://cmake.org/files/v3.12/cmake-3.12.4-Linux-x86_64.tar.gz | tar -xz -C /opt/cmake-3.12 --strip-components 1
+    - /opt/cmake-3.12/bin/cmake -S "$CI_PROJECT_DIR" -B /tmp/build
+    - /opt/cmake-3.12/bin/ctest --test-dir /tmp/build
