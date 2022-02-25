@@ -26,7 +26,8 @@ function(change_case case_type string output_variable)
   string(REGEX MATCHALL "([A-Z][a-z]*|[A-Z]+|[a-z]+|[0-9]+)" word_list "${string}")
 
   if (case_type STREQUAL "CAMEL")
-    list(POP_FRONT word_list first_word)
+    list(GET word_list 0 first_word)
+    list(REMOVE_AT word_list 0)
     first_lower("${first_word}" result)
 
     foreach (word IN LISTS word_list)
