@@ -31,13 +31,6 @@ endmacro()
 
 test_change_case(unrecognized_case NOT_A_CASE "This shall not be changed" "This shall not be changed")
 
-#iClaimThisIsAString *!@$& iInterface aioli123Xyz aAbstractions littleword BIGWORD
-#IClaimThisIsAString *!@$& IInterface Aioli123Xyz AAbstractions littleword BIGWORD
-#i_claim_this_is_a_string *!@$& i_interface aioli_123_xyz a_abstractions littleword BIGWORD
-#I_CLAIM_THIS_IS_A_STRING *!@$& I_INTERFACE AIOLI_123_XYZ A_ABSTRACTIONS littleword BIGWORD
-#i-claim-this-is-a-string *!@$& i-interface aioli-123-xyz a-abstractions littleword BIGWORD
-#I-CLAIM-THIS-IS-A-STRING *!@$& I-INTERFACE AIOLI-123-XYZ A-ABSTRACTIONS littleword BIGWORD
-
 test_change_case(camel_1 CAMEL "iClaimThisIsAString *!@$& iInterface aioli123Xyz aAbstractions littleword BIGWORD"                              "iClaimThisIsAStringIInterfaceAioli123XyzAAbstractionsLittlewordBigword")
 test_change_case(camel_2 CAMEL "IClaimThisIsAString *!@$& IInterface Aioli123Xyz AAbstractions littleword BIGWORD"                              "iClaimThisIsAStringIInterfaceAioli123XyzAAbstractionsLittlewordBigword")
 test_change_case(camel_3 CAMEL "i_claim_this_is_a_string *!@$& i_interface aioli_123_xyz a_abstractions littleword BIGWORD"                     "iClaimThisIsAStringIInterfaceAioli123XyzAAbstractionsLittlewordBigword")
