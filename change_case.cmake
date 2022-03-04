@@ -19,6 +19,9 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+#
+# To report issues or file feature requests, submit a ticket at
+# https://github.com/njmuggio/cmake-utils/issues
 
 cmake_minimum_required(VERSION 3.12)
 
