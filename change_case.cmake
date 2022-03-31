@@ -34,7 +34,7 @@ cmake_minimum_required(VERSION 3.12)
 #
 # Arguments:
 #   case_type: One of {CAMEL, PASCAL, SNAKE, DEAD_SNAKE, SCREAMING_SNAKE,
-#              KEBAB, DEAD_KEBAB, SCREAMING_KEBAB}
+#              KEBAB, DEAD_KEBAB, SCREAMING_KEBAB, PROSE, SENTENCE, TITLE}
 #   string: String to convert
 #   output_variable: Name of the output variable
 #
@@ -45,6 +45,9 @@ cmake_minimum_required(VERSION 3.12)
 # - SCREAMING_SNAKE: ABC_123_XYZ_789
 # - KEBAB/DEAD_KEBAB: abc-123-xyz-789
 # - SCREAMING_KEBAB: ABC-123-XYZ-789
+# - PROSE: abc 123 xyz 789
+# - SENTENCE: Abc 123 xyz 789
+# - TITLE: Abc 123 Xyz 789
 function(change_case case_type string output_variable)
   string(REGEX MATCHALL "([a-zA-Z0-9]+)" chunk_list "${string}")
 
@@ -94,6 +97,22 @@ function(change_case case_type string output_variable)
   elseif (case_type STREQUAL "SCREAMING_KEBAB")
     string(TOUPPER "${word_list}" word_list)
     list(JOIN word_list "-" result)
+  elseif (case_type STREQUAL "PROSE")
+    string(TOLOWER "${word_list}" word_list)
+    list(JOIN word_list " " result)
+  elseif (case_type STREQUAL "SENTENCE")
+    string(TOLOWER "${word_list}" word_list)
+    first_upper("${word_list}" word_list)
+    list(JOIN word_list " " result)
+  elseif (case_type STREQUAL "TITLE")
+    string(TOLOWER "${word_list}" word_list)
+
+    foreach (word IN LISTS word_list)
+      first_upper("${word}" word)
+      string(APPEND result " ${word}")
+    endforeach()
+
+    string(SUBSTRING "${result}" 1 -1 result)
   else()
     message(WARNING "'${case_type}' is not a recognized case. Not modifying the string")
     set(result "${string}")
