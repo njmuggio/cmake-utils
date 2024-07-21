@@ -18,3 +18,5 @@ usage details.
   * change_case
   * first_lower
   * first_upper
+* git.cmake
+  * git_details
